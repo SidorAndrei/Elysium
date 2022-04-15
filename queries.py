@@ -14,3 +14,10 @@ def get_products_by_supermarket_id(supermarket_id):
     FROM products
     WHERE supermarket_id = %(supermarket_id)s
     """, {'supermarket_id': supermarket_id})
+
+
+def get_address():
+    return connection.execute_select("""
+    SELECT address
+    FROM supermarket
+    """)
