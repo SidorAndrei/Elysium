@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elysium - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/navbar_style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/base_template.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    {% block style %}{% endblock %}
+</head>
+<body>
+    <div id="background_div"></div>
+
+    {% include 'navbar.html' %}
+
+    <div id="content">
+        <p>sadgregtef
+          fsdf s
+        def s
+         f
+        sef s
+        ef
+        sef
+        se
+         fse
+         fs
+         ef
+        </p>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
