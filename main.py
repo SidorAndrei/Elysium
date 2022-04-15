@@ -32,7 +32,8 @@ def get_address():
 
 @app.route("/test")
 def test():
-    return render_template("test.html")
+    supermarkets = queries.get_all_supermarkets()
+    return render_template("test.html", supermarkets=supermarkets)
 
 
 @app.route("/test2")

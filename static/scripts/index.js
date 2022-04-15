@@ -10,4 +10,21 @@ function initMap() {
   const marker = new google.maps.Marker(
   {position:{lat:44.4082383, lng:26.178878211280374},
       map:map})
+
+    const detailWindow = new google.maps.InfoWindow({
+        content: `<div class="supermarkets" id="1">noi castigam</div>`
+    })
+    marker.addListener("mouseover", () => {
+        detailWindow.open(map, marker);
+    })
+    marker.addListener("mouseout", () => {
+        detailWindow.close(map, marker);
+    })
+    // marker.addListener("mouseout", () => {
+    //     detailWindow.close(map, marker);
+    // })
+}
+
+function go_to_supermarket_page(supermarket_id){
+
 }
