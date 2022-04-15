@@ -1,5 +1,5 @@
 #background_div{
-    background: black url("/static/backgrounds/generalBackground.jpg") no-repeat;
+    background: black url("/static/backgrounds/generalBackground.jpg") fixed no-repeat;
 }
 
 #content{

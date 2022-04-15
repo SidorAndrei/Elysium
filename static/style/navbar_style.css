@@ -25,10 +25,12 @@
 .sidebar_menu .logo{
   position: absolute;
   width: 100%;
-  height: 60px;
+  height: 80px;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 .sidebar_menu .logo a{
+  margin-top: 20px;
+  display: flex;
   color: #fff;
   font-size: 25px;
   font-weight: 500;
@@ -36,6 +38,11 @@
   left: 50px;
   line-height: 60px;
   text-decoration: none;
+}
+
+#logo-copyright{
+  margin-top: 10px;
+  font-size: 17px;
 }
 .sidebar_menu .menu{
   position: absolute;
