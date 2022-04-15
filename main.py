@@ -16,13 +16,28 @@ def main_page():
 
 @app.route("/supermarkets")
 def supermarkets_page():
-    supermarkets = queries.get_all_supermarkets()
-    return render_template("supermarkets_page.html", supermarkets=supermarkets)
+    return render_template("supermarkets_page.html")
 
 
-@app.route("/supermarket/<supermarket_id>")
-def supermarket_page(supermarket_id):
-    products = queries.get_products_by_supermarket_id(supermarket_id)
+@app.route("/categorii")
+def categories_page():
+    return render_template("search_page.html")
+
+
+@app.route("/api/address")
+def get_address():
+    address = queries.get_address()
+    return {"address": address}
+
+
+@app.route("/test")
+def test():
+    return render_template("test.html")
+
+
+@app.route("/test2")
+def test2():
+    return render_template("test2.html")
 
 
 def main():
@@ -31,6 +46,8 @@ def main():
 
 if __name__ == "__main__":
     main();
+
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
     # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
+
