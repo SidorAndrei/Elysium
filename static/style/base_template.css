@@ -1,16 +1,9 @@
 #background_div{
-    /*background: url("/static/backgrounds/side.jpeg") no-repeat;*/
-    background-color: black;
-    position: sticky;
-    z-index: 98;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    background: black url("/static/backgrounds/generalBackground.jpg") no-repeat;
 }
 
 #content{
-    position: fixed;
+    position: relative;
     z-index: 0;
     top: 0;
     margin: 80px;
