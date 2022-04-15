@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 
 import queries
 
+import mailing
+
 load_dotenv()
 app = Flask("Elysium")
 
@@ -28,4 +30,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main();
+    # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
+    # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
+    # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
