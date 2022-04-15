@@ -3,8 +3,6 @@ from dotenv import load_dotenv
 
 import queries
 
-import mailing
-
 load_dotenv()
 app = Flask("Elysium")
 
@@ -17,6 +15,12 @@ def main_page():
 @app.route("/supermarkets")
 def supermarkets_page():
     return render_template("supermarkets_page.html")
+
+@app.route("/supermarket/<supermarket_id>")
+def supermarket_page(supermarket_id):
+    products = queries.get_products_by_supermarket_id(supermarket_id)
+    return render_template("supermarkets_page.html", products=products)
+
 
 
 @app.route("/categorii")
