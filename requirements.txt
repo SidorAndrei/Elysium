@@ -1,0 +1,7 @@
+flask
+python-dotenv
+black
+bcrypt
+psycopg2-binary
+psycopg2
+requests
