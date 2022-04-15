@@ -1,0 +1,5 @@
+{% extends 'base_template.html' %} {% block content %} Supermarkets
+{% for supermarket in supermarkets %}
+    <h1>{{ supermarket.name }}</h1>
+{% endfor %}
+{% endblock %}

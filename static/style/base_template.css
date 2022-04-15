@@ -1,7 +1,8 @@
 #background_div{
-    background: url("/static/backgrounds/side.jpeg") no-repeat;
+    /*background: url("/static/backgrounds/side.jpeg") no-repeat;*/
+    background-color: black;
     position: sticky;
-    z-index: 0;
+    z-index: 98;
     left: 0;
     top: 0;
     right: 0;
