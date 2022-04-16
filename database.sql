@@ -136,15 +136,8 @@ create table requests
     address        text
 );
 
-alter table requests
-    owner to sergiu;
 
-
-
-
-
-
-insert into  user_status(name) values ('provider'), ('organisation');
+insert into  user_status(name) values ('provider'), ('organisation'), ('admin');
 insert into categories(name) values  ('dulciuri'), ('produse de baza'), ('condimente'),
          ('lactate'), ('legume'), ('fructe'), ('carne'), ('bauturi'), ('panificatie'),
          ('conserve si borcane'), ('gustari sarate'), ('semipreparate'), ('preparate');

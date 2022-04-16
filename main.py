@@ -14,12 +14,12 @@ app.secret_key = 'usef484ns94k/-2F2@indeed-L.A.S?'
 
 @app.route("/")
 def main_page():
-    return render_template('main.html')
+    return render_template('main.html', session=session)
 
 
 @app.route("/supermarkets")
 def supermarkets_page():
-    return render_template("supermarkets_page.html")
+    return render_template("supermarkets_page.html", session=session)
 
 
 @app.route("/supermarket/<supermarket_id>", methods=["POST"])
@@ -27,12 +27,12 @@ def supermarket_page(supermarket_id):
     supermarket = queries.get_supermarket_by_id(supermarket_id)
     print(supermarket)
     products = queries.get_products_by_supermarket_id(supermarket_id)
-    return render_template("supermarket_page.html", products=products, supermarket=supermarket)
+    return render_template("supermarket_page.html", products=products, supermarket=supermarket, session=session)
 
 
 @app.route("/categorii")
 def categories_page():
-    return render_template("search_page.html")
+    return render_template("search_page.html", session=session)
 
 
 @app.route("/api/address")
@@ -44,22 +44,22 @@ def get_address():
 @app.route("/test")
 def test():
     supermarkets = queries.get_all_supermarkets()
-    return render_template("test.html", supermarkets=supermarkets)
+    return render_template("test.html", supermarkets=supermarkets, session=session)
 
 
 @app.route("/test2")
 def test2():
-    return render_template("test2.html")
+    return render_template("test2.html", session=session)
 
 
 @app.route("/login")
 def login_page():
-    return render_template('login_page.html')
+    return render_template('login_page.html', session=session)
 
 
 @app.route("/register")
 def register_page():
-    return render_template('register_page.html')
+    return render_template('register_page.html', session=session)
 
 
 @app.route("/login-request", methods=["POST"])
@@ -70,7 +70,8 @@ def login():
     print(user)
     if cryptography.verify_password(password, user["password"]):
         session.update({
-            "name": user["name"]
+            "name": user["name"],
+            "status": user["status"]
         })
         return redirect(url_for('main_page'))
 
@@ -134,7 +135,7 @@ def api_check_user(username, password):
 @app.route('/review-register-requests')
 def review_register_requests():
     requests = queries.get_register_requests()
-    return render_template('register_requests.html', requests=requests)
+    return render_template('register_requests.html', requests=requests, session=session)
 
 
 def main():

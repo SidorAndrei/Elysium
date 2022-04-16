@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-{#{% if session['user_status'] == 'organisation' %}#}
+
 <h1>{{ supermarket.name }}</h1>
 <h3>{{ supermarket.address }}</h3>
     <table>
@@ -25,15 +25,11 @@
         {% endfor %}
         </tbody>
     </table>
-{#    {% endif %}#}
 
-{#{% if session['user_status'] == 'provider'%}#}
-{#    {% for product in products%}#}
-{#<li>{{ product.name }}</li>#}
-{#    {% endif %}#}
-{#{% endif %}#}
-{##}
-{##}
+
+
+
+
 
 
 </body>

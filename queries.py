@@ -45,8 +45,9 @@ def confirm_register_request(request_id):
 
 def get_user(username):
     return connection.execute_select("""
-        SELECT username, password , name
+        SELECT username, password , users.name, us.name as status 
         FROM users
+        JOIN user_status us on us.user_status_id = users.user_status_id
         WHERE username = %(username)s
     """, {"username": username})
 

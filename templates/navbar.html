@@ -16,28 +16,51 @@
     </div>
     <div class="menu">
       <ul>
+      <li>
+          <i ><img src="{{ url_for('static', filename='logo/user.png')}}" width="24px"></i>
+          <a >{{ session['name'] }}</a>
+        </li>
+
+          <li>
+           <i ><img src="{{ url_for('static', filename='logo/deconectare.png')}}" width="20px"></i>
+          <a href="{{ url_for('logout') }}">Deconectare</a>
+        </li>
         <li><i class="fas fa-qrcode"></i>
           <a href="{{ url_for('main_page') }}">Dashboard</a>
         </li>
+          {% if session['status'] == 'admin' %}
         <li>
           <i class="fas fa-link"></i>
           <a href="{{ url_for('review_register_requests') }}">Review Requests</a>
         </li>
+          {% endif %}
+       {% if session['status'] == 'organisator'  %}
         <li>
-          <i class="fas fa-stream"></i>
-          <a href="#">Overview</a>
+          <i class="fa-solid fa-shop"></i>
+          <a href="{{ url_for('test') }}">Harta magazine</a>
         </li>
-        <li>
-          <i class="fas fa-calendar-week"></i>
-          <a href="#">Events</a>
+          <li>
+          <i class="fa-solid fa-basket-shopping-simple"></i>
+          <a href="#">Cosul meu</a>
         </li>
+          <li>
+          <i class="fa-light fa-badge-percent"></i>
+          <a href="#">Comenzile mele</a>
+        </li>
+      {% endif %}
+      {% if session['status'] == 'provider' %}
         <li>
+          <i class="fa-solid fa-cart-circle-plus"></i>
+          <a href="#">Adaugare produse</a>
+        </li>
+          <li>
+              <i class="fas fa-sliders-h"></i>
+              <a href="#">Magazinul meu</a>
+          </li>
+      {% endif %}
+          <li>
           <i class="fas fa-question-circle"></i>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <i class="fas fa-sliders-h"></i>
-          <a href="#">Services</a>
+          <a href="#">Despre noi</a>
         </li>
         <li>
           <i class="fas fa-phone-volume"></i>
@@ -47,6 +70,7 @@
           <i class="far fa-comments"></i>
           <a href="#">Feedback</a>
         </li>
+
       </ul>
     </div>
     <div class="social_media">
