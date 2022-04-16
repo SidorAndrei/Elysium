@@ -1,0 +1,55 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-form{
+    background-color: rgba(51, 51, 51, 0.63);
+    box-shadow: 0 0 5px 3px;
+    color: white;
+    font-size: 20px;
+    padding: 30px;
+}
+
+#add-form form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+label, input{
+    margin: 5px;
+    border-radius: 10px;
+}
+
+button{
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #b7b7b7;
+    color: #282828;
+    padding: 7px;
+}
+
+input[type=text], input[type=number]{
+    background-color: #b7b7b7;
+    color: black;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator{
+    filter: invert(100%);
+}
+
+input[type=date]{
+    background-color: #b7b7b7;
+    color: black;
+}
+
+select{
+    background-color: #b7b7b7;
+    color: black;
+}
+

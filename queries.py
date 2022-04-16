@@ -105,7 +105,7 @@ def get_supermarket_by_id(supermarket_id):
 
 
 def insert_product(product):
-    return connection.execute_select("""
+    return connection.execute_dml_statement("""
     INSERT 
     INTO products(supermarket_id, category_id, name, quantity, price, expire_date) 
     values (%(supermarket_id)s, %(category_id)s, %(name)s, %(quantity)s, %(price)s, %(expire_date)s)
@@ -126,6 +126,16 @@ def update_product(product_id, new_quantity):
     SET quantity = %(new_quantity)s
     WHERE product_id=%(product_id)s
     """, {"product_id": product_id, "new_quantity": new_quantity})
+
+
+def edit_product(product):
+    return connection.execute_dml_statement("""
+    UPDATE products 
+    SET quantity = %(quantity)s,
+        name = %(name)s,
+        expire_date = %(expire_date)s
+    WHERE product_id=%(product_id)s
+    """, product)
 
 
 def add_products_to_cart_by_id(user_id, product_id, quantity):
@@ -201,3 +211,11 @@ def get_supermarket_id_by_user_id(user_id):
     FROM supermarket
     WHERE user_id=%(user_id)s
     """, {'user_id': user_id})
+
+
+def get_cart_products_by_cart_id(cart_id):
+    return connection.execute_select("""
+        SELECT * FROM cart_products
+        JOIN products p on p.product_id = cart_products.product_id
+         WHERE cart_id=%(cart_id)s
+    """, {"cart_id": cart_id})

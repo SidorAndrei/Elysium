@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/add_product_page.css') }}">
+{% endblock %}
+
+
+{% block content %}
+    <div id="add-form">
+        <form action="{{ url_for('edit_product', product_id=product['product_id']) }}" method="post">
+            <label for="name">Numele produsului</label>
+            <input type="text" name="name" id="name" value="{{ product.name }}">
+            <label for="quantity">Cantitatea</label>
+            <input type="number" name="quantity" id="quantity" value="{{ product.quantity }}">
+            <label for="exp_date">Data expirare</label>
+            <input type="date" name="exp_date" id="exp_date" value="{{ product.expire_date }}">
+            <button type="submit">Editeaza produs</button>
+        </form>
+    </div>
+{% endblock %}
