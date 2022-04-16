@@ -9,6 +9,7 @@ from json_response import json_response
 
 load_dotenv()
 app = Flask("Elysium")
+app.secret_key = 'usef484ns94k/-2F2@indeed-L.A.S?'
 
 
 @app.route("/")
@@ -65,12 +66,19 @@ def register_page():
 def login():
     username = request.form.get("username")
     password = request.form.get("password")
-    user = queries.get_user(username)
+    user = queries.get_user(username)[0]
+    print(user)
     if cryptography.verify_password(password, user["password"]):
         session.update({
             "name": user["name"]
         })
         return redirect(url_for('main_page'))
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('main_page'))
 
 
 @app.route("/register-request", methods=["GET", "POST"])
@@ -114,7 +122,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main();
+    main()
 
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
