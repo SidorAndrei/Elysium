@@ -83,7 +83,8 @@ def login():
     if cryptography.verify_password(password, user["password"]):
         session.update({
             "name": user["name"],
-            "status": user["status"]
+            "status": user["status"],
+            "user_id": user["user_id"]
         })
         return redirect(url_for('main_page'))
 
@@ -156,6 +157,13 @@ def review_register_requests():
         return redirect(url_for('login_page'))
     requests = queries.get_register_requests()
     return render_template('register_requests.html', requests=requests, session=session)
+
+
+@app.route('/add_products/<product_id>/<quantity>', methods=['GET'])
+def add_products_to_cart_by_id(product_id, quantity):
+    print(product_id)
+    print(quantity)
+    return {"cart": queries.add_products_to_cart_by_id(session["user_id"], product_id, quantity)}
 
 
 def main():

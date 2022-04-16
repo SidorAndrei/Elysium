@@ -34,7 +34,7 @@
           <a href="{{ url_for('review_register_requests') }}">Review Requests</a>
         </li>
           {% endif %}
-       {% if session['status'] == 'organisator'  %}
+       {% if session['status'] == 'organisation'  %}
         <li>
           <i class="fa-solid fa-shop"></i>
           <a href="{{ url_for('test') }}">Harta magazine</a>

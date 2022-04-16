@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="{{ url_for('static', filename='scripts/API.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/supermarketProductsPage.mjs') }}" defer></script>
 </head>
 <body>
 
@@ -13,6 +15,7 @@
             <th>Numele Produsului</th>
             <th>Cantitate</th>
             <th>Data Expirarii</th>
+            <th>Cantitate Dorita</th>
         </thead>
         <tbody>
         {% for product in products %}
@@ -20,8 +23,9 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.expire_date }}</td>
+                <td><input type="number" class="quantity_fields" id="{{ product.product_id }}"></td>
+                <td><button class="submit_buttons">Submit</button></td>
             </tr>
-
         {% endfor %}
         </tbody>
     </table>
