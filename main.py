@@ -64,6 +64,11 @@ def test2():
     return render_template("test2.html", session=session)
 
 
+@app.route("/about-us")
+def about_us():
+    return render_template("about_us.html", session=session)
+
+
 @app.route("/login")
 def login_page():
     return render_template('login_page.html', session=session)

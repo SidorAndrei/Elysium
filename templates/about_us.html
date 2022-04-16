@@ -1,0 +1,34 @@
+{% extends 'base_template.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/about_us.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div id="main_about">
+        <div id="title">
+            Elysium Project
+        </div>
+        <div id="about_team">
+            We are a team of three future junior developers, students at Codecool and IT exthusiasts.
+        </div>
+        <div id="cards_container">
+            <div id="sergiu">
+                <img src="{{ url_for('static', filename='avatars/Sergiu.jpg') }}" class="avatar" width="200px">
+                <p class="description">No message</p>
+            </div>
+            <div id="loredana">
+                <img src="{{ url_for('static', filename='avatars/Lory.jpg') }}" class="avatar" width="200px">
+                <p class="description">Super message</p>
+            </div>
+            <div id="andrei">
+                <img src="{{ url_for('static', filename='avatars/Andrei.jpg') }}" class="avatar" width="200px">
+                <p class="description">No message</p>
+            </div>
+        </div>
+
+        <div id="about_project">
+            This project has been made for CoolHack2@2022 By L.A.S Team
+        </div>
+    </div>
+{% endblock %}

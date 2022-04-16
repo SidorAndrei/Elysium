@@ -4,17 +4,109 @@
     <title>Add Map</title>
     <script src="{{ url_for('static', filename='scripts/API.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
-      <style>
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='style/navbar_style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/base_template.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <style>
           #map{
               height: 700px;
               width: 100%;
           }
+          body{
+              background-color: rgba(0, 0, 0, 0.85);
+          }
+          .main_box{
+              color: black;
+          }
       </style>
-      <link rel="stylesheet" href="{{ url_for('static', filename='style/navbar_style.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/base_template.css') }}"/>
   </head>
   <body>
-    {% include 'navbar.html' %}
+    <div class="main_box">
+  <input type="checkbox" id="check">
+  <div class="btn_one">
+    <label for="check">
+      <i class="fas fa-bars"></i>
+    </label>
+  </div>
+  <div class="sidebar_menu">
+    <div class="logo">
+        <a href="#"><img id="logo-img" src="{{ url_for('static', filename='logo/elysium_logo.png') }}" width="150px" height="50px" alt="Elysium Logo"><p id="logo-copyright"><sub>©by L.A.S </sub></p></a>
+    </div>
+    <div class="btn_two">
+      <label for="check">
+        <i class="fas fa-times"></i>
+      </label>
+    </div>
+    <div class="menu">
+      <ul>
+      <li>
+          <i ><img src="{{ url_for('static', filename='logo/user.png')}}" width="24px"></i>
+          <a >{{ session['name'] }}</a>
+        </li>
+
+          <li>
+           <i ><img src="{{ url_for('static', filename='logo/deconectare.png')}}" width="20px"></i>
+          <a href="{{ url_for('logout') }}">Deconectare</a>
+        </li>
+        <li><i class="fas fa-qrcode"></i>
+          <a href="{{ url_for('main_page') }}">Dashboard</a>
+        </li>
+          {% if session['status'] == 'admin' %}
+        <li>
+          <i class="fas fa-link"></i>
+          <a href="{{ url_for('review_register_requests') }}">Review Requests</a>
+        </li>
+          {% endif %}
+       {% if session['status'] == 'organisation'  %}
+        <li>
+          <i class="fa-solid fa-shop"></i>
+          <a href="{{ url_for('test') }}">Harta magazine</a>
+        </li>
+          <li>
+          <i class="fa-solid fa-basket-shopping-simple"></i>
+          <a href="#">Cosul meu</a>
+        </li>
+          <li>
+          <i class="fa-light fa-badge-percent"></i>
+          <a href="#">Comenzile mele</a>
+        </li>
+      {% endif %}
+      {% if session['status'] == 'provider' %}
+        <li>
+          <i class="fa-solid fa-cart-circle-plus"></i>
+          <a href="#">Adaugare produse</a>
+        </li>
+          <li>
+              <i class="fas fa-sliders-h"></i>
+              <a href="#">Magazinul meu</a>
+          </li>
+      {% endif %}
+          <li>
+          <i class="fas fa-question-circle"></i>
+          <a href="#">Despre noi</a>
+        </li>
+        <li>
+          <i class="fas fa-phone-volume"></i>
+          <a href="#">Contact</a>
+        </li>
+        <li>
+          <i class="far fa-comments"></i>
+          <a href="#">Feedback</a>
+        </li>
+
+      </ul>
+    </div>
+    <div class="social_media">
+      <ul>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </ul>
+    </div>
+  </div>
+</div>
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
 

@@ -7,7 +7,7 @@
 }
 .main_box{
   position: fixed;
-  z-index: 10;
+  z-index: 99999990;
   left: 0;
   top: 0;
   bottom: 0;

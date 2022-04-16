@@ -1,0 +1,40 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#main_about{
+    margin: 5%;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 15px 5px black;
+}
+
+#title{
+    font-size: 35px;
+}
+
+#about_team, #about_project{
+    font-size: 25px;
+}
+
+#cards_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar{
+    border-radius: 200px;
+}
+.description{
+    font-size: 20px;
+}
+
+#loredana, #andrei, #sergiu{
+    margin: 50px;
+}
