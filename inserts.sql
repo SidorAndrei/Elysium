@@ -1,6 +1,13 @@
 INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (3, 'Lidl', 'Bulevardul Theodor Pallady 30, București 032266, Romania');
 INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (1, 'Mega Image', 'Strada Valea Buzăului 14, București 077160, Romania');
 INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (2, 'Profi', 'Drumul Gura Făgetului 58-68, București 032601, Romania');
+INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (4, 'Carrefour Express', 'Bulevardul Mircea Vodă 34, București 030167, Romania');
+INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (5, 'Cora Alexandriei', 'Șoseaua Alexandriei 152, București 051543, Romania');
+INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (6, 'Kaufland Bucuresti-Basarab', 'Șoseaua Orhideelor 46, București 010956, Romania');
+INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (7, 'Carrefour Express', 'Strada Petru Rareș 12, București 011101, Romania');
+INSERT INTO public.supermarket (supermarket_id, name, address) VALUES (8, 'My Auchan', 'Strada Maria Rosetti 7-9, București 020481, Romania');
+
+
 
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (1, 1, 1, 'Ciocolata Milka', 100, 0, '2022-04-22', '2022-01-01');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (2, 1, 2, 'Oua', 300, 0, '2022-04-19', '2022-04-01');
@@ -8,10 +15,42 @@ INSERT INTO public.products (product_id, supermarket_id, category_id, name, quan
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (4, 2, 3, 'Maggi', 50, 0, '2022-04-30', '2022-03-01');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (5, 2, 4, 'Lapte Zuzu 1l', 30, 0, '2022-04-22', '2022-04-26');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Portocale', 20, 0, '2022-04-28', '2022-04-01');
-INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (7, 3, 7, 'Piept de pui', 50, 0, '2022-04-18', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Castraveti', 1000, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Vinete', 2000, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Mere', 2000, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Piersici', 200, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Mandarine', 200, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Struguri', 200, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Salata verde', 200, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Varza', 200, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Rosii ', 10, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Ardei', 2000, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (7, 3, 7, 'Piept de pui', 5, 0, '2022-04-18', '2022-04-01');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (8, 3, 8, 'Nestea', 100, 0, '2022-04-20', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Coca Cola', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Pepsi', 100, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Prigat', 200, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Aqua', 100, 0, '2022-04-28', '2022-04-01');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (9, 3, 9, 'Paine', 50, 0, '2022-04-17', '2022-04-14');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (10, 1, 10, 'Conserva de fasole', 200, 0, '2022-05-25', '2020-04-03');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (11, 1, 11, 'Pringles', 10, 0, '2022-04-27', '2022-01-06');
-INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (12, 2, 12, 'Pizza Congelata', 30, 0, '2022-04-20', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Nuttline-seminte albe', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (12, 2, 12, 'Ristorante-Pizza Congelata', 30, 0, '2022-04-20', '2022-04-01');
 INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (13, 1, 13, 'Lasagna', 50, 0, '2022-04-22', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Faina Bunica 000', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Paste ', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Ulei Floarea-soarelui', 80, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Otet de mere', 10, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Paste Barilla ', 30, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Sos de rosii Barilla', 40, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Ceapa', 90, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Morcov', 80, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Legume concelate Edenia', 50, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Orez cu legume congelat Edenia', 23, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Malai Baneasa', 10, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Lasagna Edenia', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Gem de prune', 21, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Dulceata de afine', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Dulceata de visine', 27, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Castraveti murati', 20, 0, '2022-04-28', '2022-04-01');
+INSERT INTO public.products (product_id, supermarket_id, category_id, name, quantity, price, expire_date, product_date) VALUES (6, 2, 6, 'Ciuperci la conserva', 23, 0, '2022-04-28', '2022-04-01');
