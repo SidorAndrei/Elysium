@@ -216,6 +216,12 @@ def delete_product(product_id):
     queries.delete_product(product_id)
 
 
+@app.route("/api/orders/<user_id>")
+def orders(user_id):
+    orders = queries.get_orders_by_user_id(user_id)
+    return {'orders': orders}
+
+
 def main():
     app.run(debug=False)
 

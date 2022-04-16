@@ -163,3 +163,23 @@ def get_cart_products_by_user_id(user_id):
     """, {"user_id": user_id})
 
 
+def get_orders_by_user_id(user_id):
+    return connection.execute_select("""
+    SELECT *
+    FROM orders
+    WHERE  user_id=%(user_id)s
+    """, {"user_id": user_id})
+
+
+def get_categories():
+    return connection.execute_select("""
+    SELECT *
+    FROM categories""")
+
+
+def get_supermarket_id_by_user_id(user_id):
+    return connection.execute_select("""
+    SELECT supermarket_id
+    FROM supermarket
+    WHERE user_id=%(user_id)s
+    """, {'user_id': user_id})
