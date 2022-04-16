@@ -70,6 +70,13 @@ def get_address():
     """)
 
 
+def get_product_by_id_product(product_id):
+    return connection.execute_select("""
+    SELECT *
+    FROM products
+    """, {'product_id': product_id})
+
+
 def get_register_requests():
     return connection.execute_select("""
         SELECT requests.request_id, requests.username, requests.user_status_id, requests.name, 
@@ -95,6 +102,14 @@ def get_supermarket_by_id(supermarket_id):
     FROM supermarket
     WHERE supermarket_id = %(supermarket_id)s
     """, {"supermarket_id": supermarket_id}, False)
+
+
+def insert_product(product):
+    return connection.execute_select("""
+    INSERT 
+    INTO products(supermarket_id, category_id, name, quantity, price, expire_date) 
+    values (%(supermarket_id)s, %(category_id)s, %(name)s, %(quantity)s, %(price)s, %(expire_date)s)
+    """, product)
 
 
 def delete_product(product_id):

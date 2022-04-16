@@ -188,6 +188,41 @@ def finish_order():
     return redirect(url_for('get_cart_page'))
 
 
+@app.route('add-product', methods=["GET", "POST"])
+def insert_product(product):
+    if request.method == "POST":
+        queries.insert_product({
+            "supermarket_id": request.form.get("supermarket_id"),
+            "category_id": request.form.get("category_id"),
+            "quantity": request.form.get("quantity"),
+            "name": request.form.get("name"),
+            "expiration_date": request.form.get("expiration_date")}
+        )
+
+
+@app.route('/edit/product/<product_id>', methods=["GET", "POST"])
+def edit_product(product_id):
+    product = queries.get_product_by_id_product(product_id)
+    if request.method == "POST":
+        product.update(
+            {
+                "supermarket_id": request.form.get("supermarket_id"),
+                "category_id": request.form.get("category_id"),
+                "name": request.form.get("name"),
+                "quantity": request.form.get("quantity"),
+                "expiration_date": request.form.get("expiration_date")
+
+            }
+        )
+        queries.update_product(product)
+    return render_template("addProduct.html", product=product)
+
+
+@app.route("/delete-product/<product_id>")
+def delete_product(product_id):
+    queries.delete_product(product_id)
+
+
 def main():
     app.run(debug=False)
 
