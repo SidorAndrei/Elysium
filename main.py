@@ -163,7 +163,19 @@ def review_register_requests():
 def add_products_to_cart_by_id(product_id, quantity):
     print(product_id)
     print(quantity)
-    return {"cart": queries.add_products_to_cart_by_id(session["user_id"], product_id, quantity)}
+    inventory_quantity = queries.get_quantity_by_product_id(product_id)
+    print(inventory_quantity["quantity"])
+    reserved_quantity = queries.get_total_quantity_reserved_by_product_id(product_id)
+    print(reserved_quantity["total_quantity"])
+    if reserved_quantity["total_quantity"] is None:
+        reserved_quantity["total_quantity"] = 0
+        print(reserved_quantity["total_quantity"])
+    # try:
+        if inventory_quantity["quantity"] >= reserved_quantity["total_quantity"] + int(quantity):
+            return {"cart": queries.add_products_to_cart_by_id(session["user_id"], product_id, quantity)}
+    # except TypeError:
+    #     return {"s": 1}
+
 
 
 def main():
