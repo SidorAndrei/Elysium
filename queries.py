@@ -40,7 +40,7 @@ def confirm_register_request(request_id):
 
 
 def get_user(username):
-    return connection.execute_dml_statement("""
+    return connection.execute_select("""
         SELECT username, password , name
         FROM users
         WHERE username = %(username)s
