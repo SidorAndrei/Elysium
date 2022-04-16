@@ -26,8 +26,6 @@ def supermarkets_page():
     return render_template("supermarkets_page.html", session=session)
 
 
-
-
 @app.route("/supermarket/<supermarket_id>")
 def supermarket_page(supermarket_id):
     if not 'name' in session:
@@ -183,6 +181,41 @@ def get_card_page(user_id):
     return render_template('cart_page.html', products=products)
 
 
+@app.route('add-product', methods=["GET", "POST"])
+def insert_product(product):
+    if request.method == "POST":
+        queries.insert_product({
+            "supermarket_id": request.form.get("supermarket_id"),
+            "category_id": request.form.get("category_id"),
+            "quantity": request.form.get("quantity"),
+            "name": request.form.get("name"),
+            "expiration_date": request.form.get("expiration_date")}
+        )
+
+
+@app.route('/edit/product/<product_id>', methods=["GET", "POST"])
+def edit_product(product_id):
+    product = queries.get_product_by_id_product(product_id)
+    if request.method == "POST":
+        product.update(
+            {
+                "supermarket_id": request.form.get("supermarket_id"),
+                "category_id": request.form.get("category_id"),
+                "name": request.form.get("name"),
+                "quantity": request.form.get("quantity"),
+                "expiration_date": request.form.get("expiration_date")
+
+            }
+        )
+        queries.update_product(product)
+    return render_template("addProduct.html", product=product)
+
+
+@app.route("/delete-product/<product_id>")
+def delete_product(product_id):
+    queries.delete_product(product_id)
+
+
 def main():
     app.run(debug=False)
 
@@ -193,4 +226,3 @@ if __name__ == "__main__":
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
     # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
-

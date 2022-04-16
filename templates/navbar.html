@@ -51,7 +51,7 @@
       {% if session['status'] == 'provider' %}
         <li>
           <i class="fa-solid fa-cart-circle-plus"></i>
-          <a href="#">Adaugare produse</a>
+          <a href="{{ url_for('addProduct') }}">Adaugare produse</a>
         </li>
           <li>
               <i class="fas fa-sliders-h"></i>
