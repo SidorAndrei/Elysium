@@ -106,7 +106,13 @@ def register_request():
 @app.route('/confirm-request/<request_id>')
 def confirm_request(request_id):
     user = queries.confirm_register_request(request_id)[0]
-    print(user)
+    mailing.send_confirmation_mail(user["email"], user["name"], session["name"])
+    return redirect(url_for('review_register_requests'))
+
+
+@app.route('/confirm-request-organisation/<request_id>')
+def confirm_request_for_organisation(request_id):
+    user = queries.confirm_register_request_for_organisation(request_id)[0]
     mailing.send_confirmation_mail(user["email"], user["name"], session["name"])
     return redirect(url_for('review_register_requests'))
 

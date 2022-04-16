@@ -11,7 +11,11 @@
                 <td>{{ request.email }}</td>
                 <td>{{ request.name }}</td>
                 <td>{{ request.phone_number }}</td>
-                <td><a href="{{ url_for('confirm_request', request_id=request.request_id) }}">Confirm Request</a></td>
+                {% if request.status == 1 %}
+                    <td><a href="{{ url_for('confirm_request', request_id=request.request_id) }}">Aproba cererea magazinului</a></td>
+                {% else %}
+                    <td><a href="{{ url_for('confirm_request_for_organisation', request_id=request.request_id) }}">Aproba cererea organizatiei</a></td>
+                {% endif %}
                 <td><a href="{{ url_for('reject_request', request_id=request.request_id) }}">Reject Request</a></td>
             </tr>
         {% endfor %}

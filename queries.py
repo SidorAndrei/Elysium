@@ -43,6 +43,18 @@ def confirm_register_request(request_id):
     WHERE user_id = (SELECT last_value FROM users_user_id_seq);""")
 
 
+def confirm_register_request_for_organisation(request_id):
+    connection.execute_dml_statement("""
+        INSERT INTO users (username, password, user_status_id, name, email, phone_number, cui_number)  
+        (SELECT username, password, user_status_id, name, email, phone_number, cui_number         
+         FROM requests WHERE request_id = %(request_id)s);
+         INSERT INTO user_cart(user_id)  SELECT last_value FROM users_user_id_seq;
+         DELETE FROM requests WHERE  request_id = %(request_id)s;
+    """, {"request_id": request_id})
+    return connection.execute_select("""SELECT email, name FROM users 
+    WHERE user_id = (SELECT last_value FROM users_user_id_seq);""")
+
+
 def get_user(username):
     return connection.execute_select("""
         SELECT username, password , users.name, us.name as status 
