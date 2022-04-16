@@ -1,7 +1,11 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect, session
 from dotenv import load_dotenv
 
+import cryptography
 import queries
+
+import mailing
+from json_response import json_response
 
 load_dotenv()
 app = Flask("Elysium")
@@ -45,6 +49,64 @@ def test():
 @app.route("/test2")
 def test2():
     return render_template("test2.html")
+
+
+@app.route("/login")
+def login_page():
+    return render_template('login_page.html')
+
+
+@app.route("/register")
+def register_page():
+    return render_template('register_page.html')
+
+
+@app.route("/login-request", methods=["POST"])
+def login():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    user = queries.get_user(username)
+    if cryptography.verify_password(password, user["password"]):
+        session.update({
+            "name": user["name"]
+        })
+        return redirect(url_for('main_page'))
+
+
+@app.route("/register-request", methods=["GET", "POST"])
+def register_request():
+    reg_request = {
+        'name': request.form['full_name'],
+        'username': request.form['username'],
+        'password': request.form['password'],
+        'email': request.form['email'],
+        'phone_number': request.form['phone'],
+        'address': request.form['street'] + ' ' + request.form['street_number'] + ', ' +
+                   request.form['city'] + ' ' + request.form['postal_code'],
+        'status': request.form['status']
+    }
+    print(reg_request)
+    reg_request.update({
+        'password': cryptography.hash_password(reg_request['password'])
+    })
+    queries.insert_register_request(reg_request)
+    mailing.send_request_mail(reg_request['email'], reg_request['name'])
+    return redirect(url_for('main_page'))
+
+
+@app.route('/confirm-request/<request_id>')
+def confirm_request(request_id):
+    user = queries.confirm_register_request(request_id)
+    mailing.send_confirmation_mail(user["email"], user["name"], session["name"])
+
+
+@app.route('/api/check_user/<username>/<password>')
+def api_check_user(username, password):
+    user = {"user": queries.get_user(username)}
+    user.update({
+        "password_match": cryptography.verify_password(password, user["password"])
+    })
+    return {"user": user}
 
 
 def main():
