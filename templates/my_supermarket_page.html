@@ -1,0 +1,53 @@
+{% extends 'base_template.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/supermarket_page.css') }}">
+    <script src="{{ url_for('static', filename='scripts/API.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/supermarketProductsPage.mjs') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <h1 id="supermarket-name">{{ supermarket.name }}</h1>
+    <h3 id="supermarket-address">{{ supermarket.address }}</h3>
+<div id="cards_container">
+    {% for product in products %}
+        <div class="card">
+            <div class="card-title">
+                <h3 class="title">{{ product.name }}</h3>
+                <h3 class="expire_date">Expira pe {{ product.expire_date }}</h3>
+            </div>
+            <div class="quantity">
+                Cantitate: {{ product.quantity }}
+            </div>
+            <div class="sale">
+                <input placeholder="unitati" type="number" class="quantity_fields" id="{{ product.product_id }}">
+                <a href="{{ url_for('edit_product', product_id=product.product_id) }}" class="submit_buttons">Editeaza</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{#<h1>{{ supermarket.name }}</h1>#}
+{#<h3>{{ supermarket.address }}</h3>#}
+{#    <table>#}
+{#        <thead>#}
+{#            <th>Numele Produsului</th>#}
+{#            <th>Cantitate</th>#}
+{#            <th>Data Expirarii</th>#}
+{#            <th>Cantitate Dorita</th>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        #}
+{#            <tr>#}
+{#                <td>{{ product.name }}</td>#}
+{#                <td>{{ product.quantity }}</td>#}
+{#                <td>{{ product.expire_date }}</td>#}
+{#                <td><input type="number" class="quantity_fields" id="{{ product.product_id }}"></td>#}
+{#                <td><button class="submit_buttons">Submit</button></td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+

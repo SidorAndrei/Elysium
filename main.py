@@ -36,7 +36,6 @@ def supermarket_page(supermarket_id):
     return render_template("supermarket_page.html", products=products, supermarket=supermarket, session=session)
 
 
-
 @app.route("/categorii")
 def categories_page():
     if not 'name' in session:
@@ -182,40 +181,48 @@ def get_cart_page():
     return render_template('cart_page.html', products=products)
 
 
+@app.route('/my-shop')
+def my_shop():
+    products = queries.get_products_by_supermarket_id(
+        queries.get_supermarket_id_by_user_id(session["user_id"])[0]["supermarket_id"])
+    return render_template('my_supermarket_page.html',
+                           supermarket=queries.get_supermarket_by_id(products[0]["supermarket_id"]), products=products)
+
+
 @app.route('/finish-order')
 def finish_order():
     queries.place_order(session["user_id"])
     return redirect(url_for('get_cart_page'))
 
 
-@app.route('add-product', methods=["GET", "POST"])
-def insert_product(product):
+@app.route('/add-product', methods=["GET", "POST"])
+def insert_product():
     if request.method == "POST":
         queries.insert_product({
-            "supermarket_id": request.form.get("supermarket_id"),
-            "category_id": request.form.get("category_id"),
+            "supermarket_id": queries.get_supermarket_id_by_user_id(session["user_id"])[0]["supermarket_id"],
+            "category_id": request.form.get("category"),
             "quantity": request.form.get("quantity"),
+            "price": 0,
             "name": request.form.get("name"),
-            "expiration_date": request.form.get("expiration_date")}
+            "expire_date": request.form.get("exp_date")}
         )
+    categories = queries.get_categories()
+    return render_template('addProduct.html', session=session, categories=categories)
 
 
 @app.route('/edit/product/<product_id>', methods=["GET", "POST"])
 def edit_product(product_id):
-    product = queries.get_product_by_id_product(product_id)
+    product = queries.get_product_by_id_product(product_id)[0]
     if request.method == "POST":
         product.update(
             {
-                "supermarket_id": request.form.get("supermarket_id"),
-                "category_id": request.form.get("category_id"),
+                "supermarket_id": queries.get_supermarket_id_by_user_id(session["user_id"]),
                 "name": request.form.get("name"),
                 "quantity": request.form.get("quantity"),
-                "expiration_date": request.form.get("expiration_date")
-
             }
         )
-        queries.update_product(product)
-    return render_template("addProduct.html", product=product)
+        queries.edit_product(product)
+    return render_template("edit_product.html", product=product)
 
 
 @app.route("/delete-product/<product_id>")
@@ -223,10 +230,21 @@ def delete_product(product_id):
     queries.delete_product(product_id)
 
 
-@app.route("/api/orders/<user_id>")
-def orders(user_id):
-    orders = queries.get_orders_by_user_id(user_id)
+@app.route('/orders')
+def my_orders():
+    return render_template('order_history.html')
+
+
+
+@app.route("/api/orders")
+def orders():
+    orders = queries.get_orders_by_user_id(session["user_id"])
     return {'orders': orders}
+
+
+@app.route("/api/get-cart-products/<cart_id>")
+def get_cart_products(cart_id):
+    return {"products": queries.get_cart_products_by_cart_id(cart_id)}
 
 
 def main():
@@ -239,4 +257,3 @@ if __name__ == "__main__":
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
     # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
-

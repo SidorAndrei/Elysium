@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_template.html' %}
 
-</body>
-</html>
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/add_product_page.css') }}">
+{% endblock %}
+
+
+{% block content %}
+    <div id="add-form">
+        <form action="{{ url_for('insert_product') }}" method="post">
+            <label for="name">Numele produsului</label>
+            <input type="text" name="name" id="name">
+            <label for="quantity">Cantitatea</label>
+            <input type="number" name="quantity" id="quantity">
+            <label for="exp_date">Data expirare</label>
+            <input type="date" name="exp_date" id="exp_date">
+            <label for="category">Categorie</label>
+            <select name="category" id="category">
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Adauga produs</button>
+        </form>
+    </div>
+{% endblock %}

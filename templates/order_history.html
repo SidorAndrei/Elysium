@@ -1,0 +1,14 @@
+{% extends 'base_template.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/my_orders.css') }}">
+    <script src="{{ url_for('static', filename='scripts/api.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='scripts/my_orders.js') }}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+    <div id="main_cards_div">
+
+    </div>
+{% endblock %}
