@@ -137,3 +137,11 @@ def get_quantity_by_product_id(product_id):
     FROM products
     WHERE product_id = %(product_id)s
     """, {"product_id": product_id}, False)
+
+
+def get_cart_products_by_user_id(user_id):
+    return connection.execute_select("""
+    SELECT *
+    FROM cart_products
+    WHERE 
+    """)
