@@ -14,7 +14,7 @@ app.secret_key = 'usef484ns94k/-2F2@indeed-L.A.S?'
 
 @app.route("/")
 def main_page():
-    return render_template('base_template.html')
+    return render_template('main.html')
 
 
 @app.route("/supermarkets")
