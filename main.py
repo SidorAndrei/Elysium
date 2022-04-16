@@ -49,7 +49,7 @@ def get_address():
     return {"address": address}
 
 
-@app.route("/test")
+@app.route("/harta-magazine")
 def test():
     if not 'name' in session:
         return redirect(url_for('login_page'))
