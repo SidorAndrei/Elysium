@@ -14,16 +14,22 @@ app.secret_key = 'usef484ns94k/-2F2@indeed-L.A.S?'
 
 @app.route("/")
 def main_page():
+    if not 'name' in session:
+        return redirect(url_for('login_page'))
     return render_template('main.html', session=session)
 
 
 @app.route("/supermarkets")
 def supermarkets_page():
+    if not 'name' in session:
+        return redirect(url_for('login_page'))
     return render_template("supermarkets_page.html", session=session)
 
 
 @app.route("/supermarket/<supermarket_id>", methods=["POST"])
 def supermarket_page(supermarket_id):
+    if not 'name' in session:
+        redirect(url_for('login'))
     supermarket = queries.get_supermarket_by_id(supermarket_id)
     print(supermarket)
     products = queries.get_products_by_supermarket_id(supermarket_id)
@@ -32,6 +38,8 @@ def supermarket_page(supermarket_id):
 
 @app.route("/categorii")
 def categories_page():
+    if not 'name' in session:
+        return redirect(url_for('login_page'))
     return render_template("search_page.html", session=session)
 
 
@@ -43,12 +51,16 @@ def get_address():
 
 @app.route("/test")
 def test():
+    if not 'name' in session:
+        return redirect(url_for('login_page'))
     supermarkets = queries.get_all_supermarkets()
     return render_template("test.html", supermarkets=supermarkets, session=session)
 
 
 @app.route("/test2")
 def test2():
+    if not 'name' in session:
+        return redirect(url_for('login_page'))
     return render_template("test2.html", session=session)
 
 
@@ -134,6 +146,8 @@ def api_check_user(username, password):
 
 @app.route('/review-register-requests')
 def review_register_requests():
+    if not 'name' in session:
+        return redirect(url_for('login_page'))
     requests = queries.get_register_requests()
     return render_template('register_requests.html', requests=requests, session=session)
 
@@ -148,4 +162,3 @@ if __name__ == "__main__":
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
     # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
-

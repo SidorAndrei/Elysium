@@ -2,6 +2,7 @@
 *{
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+    font-size: 25px;
 }
 
 body{
@@ -16,38 +17,18 @@ body{
     justify-content: center;
 }
 
-#register_title{
-    text-align: center;
-    font-size: 25px;
-    color: #000000;
-    margin-bottom: 7px;
-}
 
-#name_div,#city_details_div, #street_details_div, #passwords_div, #contact_div{
-    display: flex;
-    flex-direction: row;
-}
-
-#first_name_div, #username_div,#city_div, #postal_code_div, #street_div,#status_div,
-#street_number_div, #password_div, #confirm_password_div, #email_div, #phone_div{
+#login_form{
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    margin: 5px 3%;
-    width: 45%;
-}
-
-
-#register_form{
-    min-width: 600px;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 10px 2px white;
     border-radius: 20px;
-    width: 60%;
-    height: 60%;
-}
-#form_data{
-    /*background-color: rgba(240, 248, 255, 0.05);*/
-    padding: 10px;
+    width: 40%;
+    height: 40%;
 }
 
 label{
@@ -69,28 +50,21 @@ input {
     font-weight: 600;
 }
 
-input::placeholder{
+input::placeholder {
     color: rgba(70, 70, 70, 0.7);
     font-size: 18px;
     font-family: 'Roboto', sans-serif;
 }
 
-select{
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 5px 2px rgb(0, 0, 0);
-    font-size: 20px;
-    font-family: inherit;
-    background-color: rgba(121, 121, 121, 0);
-    rgba(70, 70, 70, 0.7)
-    font-weight: 600;
+
+#username_div, #password_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-select:focus{
-    background-color: #b7b7b7;
-}
 
-#register_button, #logare{
+#login_button, #register{
   display: block;
   float: right;
     margin: 0.5% 90px 0.5% 0.5%;
@@ -109,13 +83,13 @@ select:focus{
   transition: all .35s;
 }
 
-#register_button span, #logare span{
+#login_button span, #register span{
     position: relative;
     text-align: center;
     z-index: 2;
 }
 
-#register_button:after, #logare:after{
+#login_button:after, #register:after{
   position: absolute;
   content: "";
   top: 0;
@@ -127,21 +101,24 @@ select:focus{
   transition: all .4s;
 }
 
-#register_button:hover, #logare:hover{
+#login_button:hover, #register:hover{
   color: #fff;
 }
 
-#register_button:hover:after, #logare:hover:after{
+#login_button:hover:after, #register:hover:after{
   width: 100%;
 }
 
-#logare{
+#register{
     display: block;
-    float: left;
-    margin-left: 60px;
+    margin-left: 90px;
     background-color: rgba(239, 239, 239, 0.81);
+    width: 60%;
 }
 
-
-
-
+#buttons_div{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    margin-top: 50px;
+}

@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Elysium - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/login_style.css') }}">
     <script src="{{ url_for('static', filename='scripts/API.js') }}" defer></script>
     <script src="{{ url_for('static', filename='scripts/login.js') }}" defer></script>
 </head>
 <body>
     <form id="login_form" action="/login-request" method="post">
+        <h3 id="login_title">Logare</h3>
         <h1 id="error_message" style="color: red;visibility: hidden" ></h1>
         <div id="username_div">
-            <label for="username">Username*</label>
+            <label for="username">Nume utilizator*</label>
             <input type="text" name="username" id="username" placeholder="enter your username">
         </div>
         <div id="password_div">
-            <label for="password">Password*</label>
+            <label for="password">Parola*</label>
             <input type="password" name="password" id="password" placeholder="enter your password">
         </div>
-        <button type="submit" id="login_button">Login</button>
+        <div id="buttons_div">
+            <button type="submit" id="login_button"><span>Logare</span></button>
+            <a id='register' href="{{ url_for('register_page') }}"><span>Spre inregistrare</span></a>
+        </div>
     </form>
 </body>
 </html>
