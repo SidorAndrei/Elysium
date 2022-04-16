@@ -175,6 +175,10 @@ def add_products_to_cart_by_id(product_id, quantity):
     return {"s": 1}
 
 
+@app.route('/cart_page')
+def get_card_page():
+    products =
+
 def main():
     app.run(debug=False)
 
