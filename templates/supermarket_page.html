@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-{% if session['user_status'] == 'organisation' %}
+{#{% if session['user_status'] == 'organisation' %}#}
 <h1>{{ supermarket.name }}</h1>
-{% for product in products%}
+<h3>{{ supermarket.address }}</h3>
     <table>
         <thead>
             <th>Numele Produsului</th>
@@ -15,23 +15,26 @@
             <th>Data Expirarii</th>
         </thead>
         <tbody>
-            <tr>{{ product.name }}</tr>
-            <tr>{{ product.quantity }}</tr>
-            <tr>{{ product.expire_date }}</tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.expire_date }}</td>
+            </tr>
+
+        {% endfor %}
         </tbody>
     </table>
-<li>{{ product.name }}</li>
-    {% endif %}
+{#    {% endif %}#}
 
-{% if session['user_status'] == 'provider'%}
-    {% for product in products%}
-<li>{{ product.name }}</li>
-    {% endif %}
-{% endif %}
+{#{% if session['user_status'] == 'provider'%}#}
+{#    {% for product in products%}#}
+{#<li>{{ product.name }}</li>#}
+{#    {% endif %}#}
+{#{% endif %}#}
+{##}
+{##}
 
-
-{% endfor %}
-<h1>AAAAAAAAAAAAA</h1>
 
 </body>
 </html>
