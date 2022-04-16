@@ -21,11 +21,11 @@ def main_page():
 def supermarkets_page():
     return render_template("supermarkets_page.html")
 
+
 @app.route("/supermarket/<supermarket_id>")
 def supermarket_page(supermarket_id):
     products = queries.get_products_by_supermarket_id(supermarket_id)
     return render_template("supermarkets_page.html", products=products)
-
 
 
 @app.route("/categorii")
@@ -101,17 +101,37 @@ def register_request():
 
 @app.route('/confirm-request/<request_id>')
 def confirm_request(request_id):
-    user = queries.confirm_register_request(request_id)
+    user = queries.confirm_register_request(request_id)[0]
+    print(user)
     mailing.send_confirmation_mail(user["email"], user["name"], session["name"])
+    return redirect(url_for('review_register_requests'))
+
+
+@app.route('/reject-request/<request_id>')
+def reject_request(request_id):
+    user = queries.reject_register_request(request_id)[0]
+    print(user)
+    mailing.send_rejected_mail(user["email"], user["name"], session["name"], "No accurate details")
+    return redirect(url_for('review_register_requests'))
 
 
 @app.route('/api/check_user/<username>/<password>')
 def api_check_user(username, password):
-    user = {"user": queries.get_user(username)}
-    user.update({
-        "password_match": cryptography.verify_password(password, user["password"])
-    })
-    return {"user": user}
+    print(username, password)
+    try:
+        user = queries.get_user(username)[0]
+        user.update({
+            "password_match": cryptography.verify_password(password, user["password"])
+        })
+        return {"user": user}
+    except IndexError:
+        return {"user": {"username": None}}
+
+
+@app.route('/review-register-requests')
+def review_register_requests():
+    requests = queries.get_register_requests()
+    return render_template('register_requests.html', requests=requests)
 
 
 def main():
@@ -124,4 +144,3 @@ if __name__ == "__main__":
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
     # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
-

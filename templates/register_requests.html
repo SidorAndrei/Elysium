@@ -1,0 +1,19 @@
+{% extends 'base_template.html' %}
+
+{% block title %} Review Requests {% endblock %}
+
+{% block content %}
+    <table>
+        {% for request in requests %}
+            <tr>
+                <td>{{ request.username }}</td>
+                <td>{{ request.status }}</td>
+                <td>{{ request.email }}</td>
+                <td>{{ request.name }}</td>
+                <td>{{ request.phone_number }}</td>
+                <td><a href="{{ url_for('confirm_request', request_id=request.request_id) }}">Confirm Request</a></td>
+                <td><a href="{{ url_for('reject_request', request_id=request.request_id) }}">Reject Request</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
