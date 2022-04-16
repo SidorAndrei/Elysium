@@ -1,10 +1,11 @@
 drop table if exists  orders;
 drop table if exists user_cart;
-drop table if exists carts;
+drop table if exists cart_products;
 drop table if exists products;
 drop table if exists categories;
 drop table if exists supermarket;
 drop table if exists users;
+drop table if exists requests;
 drop table if exists user_status;
 
 
@@ -77,11 +78,11 @@ create table products
 
 
 
-create table carts
+create table cart_products
 (
-    cart_id    serial
-        constraint carts_pk
-            primary key,
+    cart_id   integer not null
+        constraint cart_products_user_cart_id_fk
+            references user_cart,
     product_id integer not null
         constraint carts_products_product_id_fk
             references products,
@@ -92,9 +93,9 @@ create table carts
 
 create table user_cart
 (
-    cart_id integer not null
-        constraint user_cart_carts_cart_id_fk
-            references carts,
+    cart_id serial
+            constraint user_cart_pk
+                primary key,
     user_id integer not null
         constraint user_cart_users_user_id_fk
             references users
@@ -113,6 +114,24 @@ create table orders
         constraint orders_carts_cart_id_fk
             references carts
 );
+
+create table requests
+(
+    request_id     serial
+        constraint requests_pk
+            primary key,
+    username       text,
+    password       text,
+    user_status_id integer
+        constraint requests_user_status_user_status_id_fk
+            references user_status,
+    name           text,
+    email          text,
+    phone_number   text,
+    cui_number     text
+);
+
+
 
 
 insert into  user_status(name) values ('provider'), ('organisation');
