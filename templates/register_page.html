@@ -10,26 +10,26 @@
 </head>
 <body>
     <form method="post" action="/register-request" id="register_form">
-        <h3 id="register_title">Create Account</h3>
+        <h3 id="register_title">Creare cont</h3>
         <div id="form_data">
             <h1 id="error_message" style="color: red;visibility: hidden" ></h1>
             <div id="name_div">
                 <div id="first_name_div">
-                    <label for="full_name">Company name*</label>
+                    <label for="full_name">Nume companie*</label>
                     <input type="text" id="full_name" name="full_name" placeholder="enter your company name">
                 </div>
                 <div id="username_div">
-                    <label for="username">Username*</label>
+                    <label for="username">Nume utilizator*</label>
                     <input type="text" id="username" name="username" placeholder="enter your username">
                 </div>
             </div>
             <div id="passwords_div">
                 <div id="password_div">
-                    <label for="password">Password*</label>
+                    <label for="password">Parola*</label>
                     <input type="password" id="password" name="password" placeholder="enter your password">
                 </div>
                 <div id="confirm_password_div">
-                    <label for="confirm_password">Confirm password*</label>
+                    <label for="confirm_password">Confirmati parola*</label>
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="enter your password again">
                 </div>
             </div>
@@ -39,39 +39,40 @@
                     <input type="email" id="email" name="email" placeholder="enter your email">
                 </div>
                 <div id="phone_div">
-                    <label for="phone">Phone number*</label>
+                    <label for="phone">Numar de telefon*</label>
                     <input type="text" id="phone" name="phone" placeholder="enter your phone number">
                 </div>
             </div>
             <div id="city_details_div">
                 <div id="city_div">
-                    <label for="city">City*</label>
+                    <label for="city">Oras*</label>
                     <input type="text" id="city" name="city" placeholder="enter your city">
                 </div>
                 <div id="postal_code_div">
-                    <label for="postal_code">Postal Code*</label>
+                    <label for="postal_code">Cod postal*</label>
                     <input type="text" id="postal_code" name="postal_code" placeholder="enter your postal code">
                 </div>
             </div>
             <div id="street_details_div">
                 <div id="street_div">
-                    <label for="street">Street*</label>
+                    <label for="street">Strada*</label>
                     <input type="text" id="street" name="street" placeholder="enter your street name">
                 </div>
                 <div id="street_number_div">
-                    <label for="street_number">Street number*</label>
+                    <label for="street_number">Numarul strazii*</label>
                     <input type="text" id="street_number" name="street_number" placeholder="enter your street number">
                 </div>
                 <div id="status_div">
                     <label for="status">Status*</label>
                     <select id="status" name="status">
-                        <option value="1" selected>Provider</option>
-                        <option value="2">Organization</option>
+                        <option value="1" selected>Comerciant</option>
+                        <option value="2">Organizatie</option>
                     </select>
                 </div>
             </div>
         </div>
         <button id="register_button" type="submit"><span>Send register request</span></button>
+        <a id="logare" href="{{ url_for('login_page') }}"><span>Spre logare</span></a>
     </form>
 </body>
 </html>
