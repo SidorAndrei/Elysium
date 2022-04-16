@@ -1,42 +1,3 @@
-console.log("aaaaaaaaa")
-
-// function initMap() {
-//   let options = {
-//       center: {lat:44.4268, lng:26.1025},
-//       zoom:12
-//   }
-//   let map = new google.maps.Map(document. getElementById("map"), options)
-//     function addMarker(property){
-//     const marker = new google.maps.Marker(
-//       {position:property.location,
-//           map:map})
-//
-//         const detailWindow = new google.maps.InfoWindow({
-//             content: `<h1>${property.name}</h1>
-//                         <h3>${property.location}</h3>`
-//         })
-//         marker.addListener("mouseover", () => {
-//             detailWindow.open(map, marker);
-//         })
-//         marker.addListener("mouseout", () => {
-//             detailWindow.close(map, marker);
-//         })
-//         marker.addListener("click", () => {
-//             go_to_supermarket_page(property.id).then(r =>
-//             {});
-//         })
-// }
-//     addMarker({id:1, name:"CBA", location:{lat:44.4082383, lng:26.178878211280374} })
-//
-// }
-//
-// async function go_to_supermarket_page(supermarket_id){
-//     document.querySelector('body').innerHTML += `<form id="form_red" method=post action='/supermarket/${supermarket_id}'></form>`;
-//     document.querySelector('#form_red').submit();
-// }
-
-
-
 function initMap() {
   let options = {
       center: {lat:44.4268, lng:26.1025},
@@ -84,7 +45,6 @@ function initMap() {
 }
 
     findAddress().then();
-    addMarker({id:1, name:"CBA", location:{lat:44.4082383, lng:26.178878211280374} })
 
 }
 
@@ -92,8 +52,3 @@ async function go_to_supermarket_page(supermarket_id){
     document.querySelector('body').innerHTML += `<form id="form_red" method=post action='/supermarket/${supermarket_id}'></form>`;
     document.querySelector('#form_red').submit();
 }
-
-
-
-
-// {lat:44.4082383, lng:26.178878211280374}

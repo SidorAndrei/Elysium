@@ -1,13 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_template.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/cart_page.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div id="card">
+        <h1>Cosul tau de cumparaturi</h1>
         {% for product in products %}
-            {{ product.name }}
-            {{ prodact.quantity }}
+            <div class="card-row">
+                <div class="product">
+                    {{ product.name }}
+                    <span>{{ product.quantity }} bucati</span>
+                </div>
+            </div>
         {% endfor %}
-</body>
-</html>
+        <a id="order_button" href="{{ url_for('finish_order') }}">Plaseaza comanda</a>
+    </div>
+
+{% endblock %}

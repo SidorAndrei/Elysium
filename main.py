@@ -26,9 +26,7 @@ def supermarkets_page():
     return render_template("supermarkets_page.html", session=session)
 
 
-
-
-@app.route("/supermarket/<supermarket_id>")
+@app.route("/supermarket/<supermarket_id>", methods=["POST"])
 def supermarket_page(supermarket_id):
     if not 'name' in session:
         redirect(url_for('login'))
@@ -36,6 +34,7 @@ def supermarket_page(supermarket_id):
     print(supermarket)
     products = queries.get_products_by_supermarket_id(supermarket_id)
     return render_template("supermarket_page.html", products=products, supermarket=supermarket, session=session)
+
 
 
 @app.route("/categorii")
@@ -169,7 +168,7 @@ def review_register_requests():
 @app.route('/add_products/<product_id>/<quantity>', methods=['GET'])
 def add_products_to_cart_by_id(product_id, quantity):
     inventory_quantity = queries.get_quantity_by_product_id(product_id)
-    reserved_quantity = queries.get_total_quantity_reserved_by_product_id(product_id)
+    reserved_quantity = queries.get_total_quantity_reserved_by_product_id(product_id, session["user_id"])
     if reserved_quantity["total_quantity"] is None:
         reserved_quantity["total_quantity"] = 0
     if inventory_quantity["quantity"] >= reserved_quantity["total_quantity"] + int(quantity):
@@ -177,10 +176,16 @@ def add_products_to_cart_by_id(product_id, quantity):
     return {"s": 1}
 
 
-@app.route('/cart_page/<user_id>')
-def get_card_page(user_id):
-    products = queries.get_cart_products_by_user_id(user_id)
+@app.route('/cart_page')
+def get_cart_page():
+    products = queries.get_cart_products_by_user_id(session["user_id"])
     return render_template('cart_page.html', products=products)
+
+
+@app.route('/finish-order')
+def finish_order():
+    queries.place_order(session["user_id"])
+    return redirect(url_for('get_cart_page'))
 
 
 def main():
