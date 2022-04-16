@@ -14,7 +14,7 @@ app.secret_key = 'usef484ns94k/-2F2@indeed-L.A.S?'
 
 @app.route("/")
 def main_page():
-    return render_template('base_template.html')
+    return render_template('main.html')
 
 
 @app.route("/supermarkets")
@@ -104,17 +104,37 @@ def register_request():
 
 @app.route('/confirm-request/<request_id>')
 def confirm_request(request_id):
-    user = queries.confirm_register_request(request_id)
+    user = queries.confirm_register_request(request_id)[0]
+    print(user)
     mailing.send_confirmation_mail(user["email"], user["name"], session["name"])
+    return redirect(url_for('review_register_requests'))
+
+
+@app.route('/reject-request/<request_id>')
+def reject_request(request_id):
+    user = queries.reject_register_request(request_id)[0]
+    print(user)
+    mailing.send_rejected_mail(user["email"], user["name"], session["name"], "No accurate details")
+    return redirect(url_for('review_register_requests'))
 
 
 @app.route('/api/check_user/<username>/<password>')
 def api_check_user(username, password):
-    user = {"user": queries.get_user(username)}
-    user.update({
-        "password_match": cryptography.verify_password(password, user["password"])
-    })
-    return {"user": user}
+    print(username, password)
+    try:
+        user = queries.get_user(username)[0]
+        user.update({
+            "password_match": cryptography.verify_password(password, user["password"])
+        })
+        return {"user": user}
+    except IndexError:
+        return {"user": {"username": None}}
+
+
+@app.route('/review-register-requests')
+def review_register_requests():
+    requests = queries.get_register_requests()
+    return render_template('register_requests.html', requests=requests)
 
 
 def main():

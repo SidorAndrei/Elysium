@@ -1,9 +1,10 @@
-document.querySelector('#login_button').addEventListener('click', evt => {
+document.querySelector('button').addEventListener('click', evt => {
+    evt.preventDefault();
     let username = document.querySelector('#username').value;
     let password = document.querySelector('#password').value;
-    apiGet(`/api/check_user/${username}`).then(
+    apiGet(`/api/check_user/${username}/${password}`).then(
         r => {
-            console.log(r);
+            r = r.user;
             if (!!!r.username) {
                 let error = document.querySelector('#error_message');
                 error.style.visibility = 'visible';
