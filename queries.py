@@ -121,11 +121,11 @@ def delete_product(product_id):
 
 
 def update_product(product_id, new_quantity):
-    return connection.execute_select("""
+    return connection.execute_dml_statement("""
     UPDATE products 
     SET quantity = %(new_quantity)s
     WHERE product_id=%(product_id)s
-    """, {"product_id": product_id, "quantity": new_quantity})
+    """, {"product_id": product_id, "new_quantity": new_quantity})
 
 
 def add_products_to_cart_by_id(user_id, product_id, quantity):
@@ -137,12 +137,13 @@ def add_products_to_cart_by_id(user_id, product_id, quantity):
     """, {"user_id": user_id, "product_id": product_id, "quantity": quantity})
 
 
-def get_total_quantity_reserved_by_product_id(product_id):
+def get_total_quantity_reserved_by_product_id(product_id, user_id):
     return connection.execute_select("""
     SELECT SUM(quantity) AS total_quantity
     FROM cart_products    
-    WHERE product_id = %(product_id)s
-    """, {"product_id": product_id}, False)
+    WHERE product_id = %(product_id)s AND cart_id = (SELECT cart_id 
+                FROM user_cart WHERE user_id= %(user_id)s ORDER BY cart_id DESC LIMIT 1)
+    """, {"product_id": product_id, "user_id": user_id}, False)
 
 
 def get_quantity_by_product_id(product_id):
@@ -157,9 +158,26 @@ def get_cart_products_by_user_id(user_id):
     return connection.execute_select("""
     SELECT cp.quantity, cp.product_id, cp.cart_id, p.name
     FROM cart_products cp
-    JOIN user_cart uc on uc.cart_id = cp.cart_id
+    JOIN user_cart uc on uc.cart_id = cp.cart_id 
     JOIN products p on p.product_id = cp.product_id
-    WHERE user_id = %(user_id)s 
+    WHERE user_id = %(user_id)s AND uc.cart_id = (SELECT cart_id FROM user_cart ORDER BY cart_id DESC LIMIT 1)
+    """, {"user_id": user_id})
+
+
+def get_product_quantity(product_id):
+    return connection.execute_select("""
+        SELECT quantity FROM products WHERE product_id=%(product_id)s
+    """, {"product_id": product_id})[0]
+
+
+def place_order(user_id):
+    products = get_cart_products_by_user_id(user_id)
+    for product in products:
+        update_product(product["product_id"], get_product_quantity(product["product_id"])["quantity"] - product["quantity"])
+    connection.execute_dml_statement("""
+        INSERT INTO orders(user_id, cart_id) VALUES (%(user_id)s, 
+            (SELECT cart_id FROM user_cart WHERE user_cart.user_id=%(user_id)s ORDER BY cart_id DESC LIMIT 1));
+        INSERT INTO user_cart (user_id) values (%(user_id)s);
     """, {"user_id": user_id})
 
 
