@@ -20,10 +20,14 @@ function showAddress() {
 async function findAddress() {
     apiGet(`/api/address`).then(result => result.address.forEach(a => {
         let url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + a.address
+        console.log(url)
+        console.log(a)
         fetch(url)
             .then(response => response.json())
             .then(data => addressArr = data)
-            .then(show => showAddress())
+            .then(show => {console.log(show[0].lat); console.log(show[0].lon);
+
+            })
             .catch(err => console.log(err))
     } ))
 

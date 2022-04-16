@@ -26,7 +26,7 @@ def send_mail(mail, template, json_data):
         print(response.body)
         print(response.headers)
     except Exception as e:
-        print(e.message)
+        print(e.__cause__)
 
 
 def send_rejected_mail(mail, name, admin_name, reason):

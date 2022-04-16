@@ -1,6 +1,6 @@
 drop table if exists  orders;
-drop table if exists user_cart;
 drop table if exists cart_products;
+drop table if exists user_cart;
 drop table if exists products;
 drop table if exists categories;
 drop table if exists supermarket;
@@ -9,14 +9,6 @@ drop table if exists requests;
 drop table if exists user_status;
 
 
-create table supermarket
-(
-    supermarket_id serial
-        constraint supermarket_pk
-            primary key,
-    name           text not null,
-    address        text
-);
 
 
 create table user_status
@@ -44,6 +36,18 @@ create table users
     email          text    not null,
     phone_number   text    not null,
     cui_number     text
+);
+
+create table supermarket
+(
+    supermarket_id serial
+        constraint supermarket_pk
+            primary key,
+    name           text not null,
+    address        text,
+    user_id        integer
+        constraint supermarket_users_user_id_fk
+            references users
 );
 
 
@@ -78,6 +82,18 @@ create table products
 
 
 
+create table user_cart
+(
+    cart_id serial
+        constraint user_cart_pk
+            primary key,
+    user_id integer not null
+        constraint user_cart_users_user_id_fk
+            references users
+);
+
+
+
 create table cart_products
 (
     cart_id   integer not null
@@ -87,18 +103,6 @@ create table cart_products
         constraint carts_products_product_id_fk
             references products,
     quantity   integer not null
-);
-
-
-
-create table user_cart
-(
-    cart_id serial
-            constraint user_cart_pk
-                primary key,
-    user_id integer not null
-        constraint user_cart_users_user_id_fk
-            references users
 );
 
 
@@ -112,7 +116,7 @@ create table orders
             references users,
     cart_id  integer not null
         constraint orders_carts_cart_id_fk
-            references carts
+            references user_cart
 );
 
 create table requests
@@ -128,8 +132,14 @@ create table requests
     name           text,
     email          text,
     phone_number   text,
-    cui_number     text
+    cui_number     text,
+    address        text
 );
+
+alter table requests
+    owner to sergiu;
+
+
 
 
 
