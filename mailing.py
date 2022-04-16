@@ -1,9 +1,11 @@
 import json
 import os
-from sendgrid import SendGridAPIClient
+
 from sendgrid.helpers.mail import Mail
 from flask import jsonify
 import dotenv
+from sendgrid.sendgrid import SendGridAPIClient
+# from sendgrid import SendGridAPIClient
 
 dotenv.load_dotenv()
 

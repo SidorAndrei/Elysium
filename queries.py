@@ -1,6 +1,5 @@
 import connection
 
-
 def get_all_supermarkets():
     return connection.execute_select("""
     SELECT *
@@ -141,7 +140,11 @@ def get_quantity_by_product_id(product_id):
 
 def get_cart_products_by_user_id(user_id):
     return connection.execute_select("""
-    SELECT *
-    FROM cart_products
-    WHERE 
-    """)
+    SELECT cp.quantity, cp.product_id, cp.cart_id, p.name
+    FROM cart_products cp
+    JOIN user_cart uc on uc.cart_id = cp.cart_id
+    JOIN products p on p.product_id = cp.product_id
+    WHERE user_id = %(user_id)s 
+    """, {"user_id": user_id})
+
+
