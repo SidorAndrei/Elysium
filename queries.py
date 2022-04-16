@@ -137,7 +137,3 @@ def get_quantity_by_product_id(product_id):
     FROM products
     WHERE product_id = %(product_id)s
     """, {"product_id": product_id}, False)
-
-
-
-# aaaaaaa

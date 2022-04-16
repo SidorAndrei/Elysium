@@ -54,7 +54,7 @@ def test():
     if not 'name' in session:
         return redirect(url_for('login_page'))
     supermarkets = queries.get_all_supermarkets()
-    return render_template("test.html", supermarkets=supermarkets, session=session)
+    return render_template("map.html", supermarkets=supermarkets, session=session)
 
 
 @app.route("/test2")
@@ -166,21 +166,13 @@ def review_register_requests():
 
 @app.route('/add_products/<product_id>/<quantity>', methods=['GET'])
 def add_products_to_cart_by_id(product_id, quantity):
-    print(product_id)
-    print(quantity)
     inventory_quantity = queries.get_quantity_by_product_id(product_id)
-    print(inventory_quantity["quantity"])
     reserved_quantity = queries.get_total_quantity_reserved_by_product_id(product_id)
-    print(reserved_quantity["total_quantity"])
     if reserved_quantity["total_quantity"] is None:
         reserved_quantity["total_quantity"] = 0
-        print(reserved_quantity["total_quantity"])
-    # try:
-        if inventory_quantity["quantity"] >= reserved_quantity["total_quantity"] + int(quantity):
-            return {"cart": queries.add_products_to_cart_by_id(session["user_id"], product_id, quantity)}
-    # except TypeError:
-    #     return {"s": 1}
-
+    if inventory_quantity["quantity"] >= reserved_quantity["total_quantity"] + int(quantity):
+        return {"cart": queries.add_products_to_cart_by_id(session["user_id"], product_id, quantity)}
+    return {"s": 1}
 
 
 def main():
