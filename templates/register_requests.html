@@ -2,22 +2,44 @@
 
 {% block title %} Review Requests {% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/register_requests_page.css') }}">
+{% endblock %}
+
 {% block content %}
-    <table>
+    <div id="container_div">
         {% for request in requests %}
-            <tr>
-                <td>{{ request.username }}</td>
-                <td>{{ request.status }}</td>
-                <td>{{ request.email }}</td>
-                <td>{{ request.name }}</td>
-                <td>{{ request.phone_number }}</td>
-                {% if request.status == 1 %}
-                    <td><a href="{{ url_for('confirm_request', request_id=request.request_id) }}">Aproba cererea magazinului</a></td>
-                {% else %}
-                    <td><a href="{{ url_for('confirm_request_for_organisation', request_id=request.request_id) }}">Aproba cererea organizatiei</a></td>
-                {% endif %}
-                <td><a href="{{ url_for('reject_request', request_id=request.request_id) }}">Reject Request</a></td>
-            </tr>
+            <div class="balloon_div">
+                <div class="title_div">
+                    {{ request.username }} doreste sa se inregistreze cu rol de
+                    {% if request.status == 'provider' %} comerciant
+                    {% else %} organizatie {% endif %}
+                </div>
+                <div class="details_div">
+                    <p>Detalii: </p>
+                    <div class="company">
+                        Nume {% if request.status == 'provider' %} companie:
+                        {% else %} organizatie: {% endif %} {{ request.name }}
+                    </div>
+                    <p>Contact:</p>
+                    <div class="contact">
+                        <p>Email: {{ request.email }}</p>
+                        <p>Telefon: {{ request.phone_number }}</p>
+                    </div>
+                </div>
+
+                <div class="answer">
+                    <p>Care este decizia dumneavoastra?</p>
+                    <div class="buttons_div">
+                        {% if request.status == 'provider' %}
+                            <a href="{{ url_for('confirm_request', request_id=request.request_id) }}"><span>Aproba magazinul</span></a>
+                        {% else %}
+                            <a href="{{ url_for('confirm_request_for_organisation', request_id=request.request_id) }}"><span>Aproba organizatia</span></a>
+                        {% endif %}
+                            <a href="{{ url_for('reject_request', request_id=request.request_id) }}"><span>Respinge cererea</span></a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </table>
+    </div>
 {% endblock %}
