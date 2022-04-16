@@ -26,7 +26,9 @@ def supermarkets_page():
     return render_template("supermarkets_page.html", session=session)
 
 
-@app.route("/supermarket/<supermarket_id>", methods=["POST"])
+
+
+@app.route("/supermarket/<supermarket_id>")
 def supermarket_page(supermarket_id):
     if not 'name' in session:
         redirect(url_for('login'))
@@ -175,9 +177,11 @@ def add_products_to_cart_by_id(product_id, quantity):
     return {"s": 1}
 
 
-@app.route('/cart_page')
-def get_card_page():
-    products =
+@app.route('/cart_page/<user_id>')
+def get_card_page(user_id):
+    products = queries.get_cart_products_by_user_id(user_id)
+    return render_template('cart_page.html', products=products)
+
 
 def main():
     app.run(debug=False)
@@ -189,3 +193,4 @@ if __name__ == "__main__":
     # mailing.send_rejected_mail('sidor.marian.andrei3001@gmail.com', "Loredana", "Sidor Andrei", "Noisy")
     # mailing.send_confirmation_mail('sidor.marian.andrei3001@gmail.com', "Sidor Andrei", "Loredana Stefania")
     # mailing.send_request_mail("sidor.marian.andrei3001@gmail.com", "Sidor Andrei")
+
