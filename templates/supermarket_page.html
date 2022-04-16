@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if session['user_status'] == 'organisation' %}
+<h1>{{ supermarket.name }}</h1>
+{% for product in products%}
+    <table>
+        <thead>
+            <th>Numele Produsului</th>
+            <th>Cantitate</th>
+            <th>Data Expirarii</th>
+        </thead>
+        <tbody>
+            <tr>{{ product.name }}</tr>
+            <tr>{{ product.quantity }}</tr>
+            <tr>{{ product.expire_date }}</tr>
+        </tbody>
+    </table>
+<li>{{ product.name }}</li>
+    {% endif %}
+
+{% if session['user_status'] == 'provider'%}
+    {% for product in products%}
+<li>{{ product.name }}</li>
+    {% endif %}
+{% endif %}
+
+
+{% endfor %}
+<h1>AAAAAAAAAAAAA</h1>
+
+</body>
+</html>

@@ -20,11 +20,13 @@ function initMap() {
     marker.addListener("mouseout", () => {
         detailWindow.close(map, marker);
     })
-    // marker.addListener("mouseout", () => {
-    //     detailWindow.close(map, marker);
-    // })
+    marker.addListener("click", () => {
+        go_to_supermarket_page(1).then(r =>
+        {});
+    })
 }
 
-function go_to_supermarket_page(supermarket_id){
-
+async function go_to_supermarket_page(supermarket_id){
+    document.querySelector('body').innerHTML += `<form id="form_red" method=post action='/supermarket/${supermarket_id}'></form>`;
+    document.querySelector('#form_red').submit();
 }

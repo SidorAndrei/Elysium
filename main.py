@@ -16,11 +16,13 @@ def main_page():
 def supermarkets_page():
     return render_template("supermarkets_page.html")
 
-@app.route("/supermarket/<supermarket_id>")
-def supermarket_page(supermarket_id):
-    products = queries.get_products_by_supermarket_id(supermarket_id)
-    return render_template("supermarkets_page.html", products=products)
 
+@app.route("/supermarket/<supermarket_id>", methods=["POST"])
+def supermarket_page(supermarket_id):
+    supermarket = queries.get_supermarket_by_id(supermarket_id)
+    print(supermarket)
+    products = queries.get_products_by_supermarket_id(supermarket_id)
+    return render_template("supermarket_page.html", products=products, supermarket=supermarket)
 
 
 @app.route("/categorii")
